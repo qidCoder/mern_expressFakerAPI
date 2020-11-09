@@ -22,23 +22,54 @@ app.use( faker() );
 
 ////////////////////////////////////////
 
-//bring in the string of whatever the URL is - we are going to bring in the home route/index route
-app.get('/', (req, res) => [
-    //to respond with a json object, just give it any object body
-    res.json({msg: "this is a message sent back from a get request"})
-])
+//create Faker classes
 
-//adding in another route
-app.get('/name', (req,res) => {
-    res.json({name: "SHelley!!!"})
-})
+class User{
+    constructor() {
+        this.user_id = faker.random.number();
+        this.firstName = faker.name.firstName();
+        this.lastName = faker.name.lastName();
+        this.phoneNumber = faker.phone.phoneNumber();
+        this.email = faker.internet.email();
+        this.password = faker.random.alphaNumeric();
+    }
+}
 
-//adding in a POST request
-app.post('/create', (req, res) => {
-    console.log(req.body)
-    res.json({msg: `Thanks ${req.body.name}!`})//requires a response
-})
+class Company {
+    constructor() {
+        this.company_id = faker.random.number();
+        this.name = faker.company.companyName();
+        this.address = {
+            street = faker.address.streetAddress(),
+            city = faker.address.city(),
+            state = faker.address.state(),
+            zipCode = faker.address.zipCode(),
+            country = faker.address.country()
+        }
+    }
+}
 
-app.listen( port, () => {
-    console.log(`Listening on port ${port}`)
-})
+// //bring in the string of whatever the URL is - we are going to bring in the home route/index route
+// app.get('/', (req, res) => [
+//     //to respond with a json object, just give it any object body
+//     res.json({msg: "this is a message sent back from a get request"})
+// ])
+
+// //adding in another route
+// app.get('/name', (req,res) => {
+//     res.json({name: "SHelley!!!"})
+// })
+
+// //adding in a POST request
+// app.post('/create', (req, res) => {
+//     console.log(req.body)
+//     res.json({msg: `Thanks ${req.body.name}!`})//requires a response
+// })
+
+// app.listen( port, () => {
+//     console.log(`Listening on port ${port}`)
+// })
+
+
+//notes
+//faker documentation https://github.com/marak/Faker.js/
