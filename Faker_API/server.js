@@ -55,8 +55,15 @@ app.get('/api/users/new', (req,res) => {
     //make an instance of the class
     const new_user = new User();
     res.json({msg: new_user})
-})
+});
+
 // Create an api route "/api/companies/new" that returns a new company
+app.get('/api/companies/new', (req,res) => {
+    //create new company class instance
+    const new_company = new Company();
+    res.json({msg: new_company});
+});
+
 // Create an api route "/api/user/company" that returns both a new user and a new company
 
 //listening port in the console log
