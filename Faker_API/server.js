@@ -18,7 +18,7 @@ app.use( cors() );//allows for our site to talk to other cross origin sites by h
 
 app.use( express.json() );//allows our Express application to be able to read and output JSON
 
-app.use( faker() );
+// app.use( faker() );
 
 ////////////////////////////////////////
 
@@ -31,7 +31,7 @@ class User{
         this.lastName = faker.name.lastName();
         this.phoneNumber = faker.phone.phoneNumber();
         this.email = faker.internet.email();
-        this.password = faker.random.alphaNumeric();
+        this.password = faker.internet.password();
     }
 }
 
@@ -40,36 +40,29 @@ class Company {
         this.company_id = faker.random.number();
         this.name = faker.company.companyName();
         this.address = {
-            street = faker.address.streetAddress(),
-            city = faker.address.city(),
-            state = faker.address.state(),
-            zipCode = faker.address.zipCode(),
-            country = faker.address.country()
+            street : faker.address.streetAddress(),
+            city : faker.address.city(),
+            state : faker.address.state(),
+            zipCode : faker.address.zipCode(),
+            country : faker.address.country()
         }
     }
 }
 
-// //bring in the string of whatever the URL is - we are going to bring in the home route/index route
-// app.get('/', (req, res) => [
-//     //to respond with a json object, just give it any object body
-//     res.json({msg: "this is a message sent back from a get request"})
-// ])
+//////////////////////////////////
+// Create an api route "/api/users/new" that returns a new user
+app.get('/api/users/new', (req,res) => {
+    //make an instance of the class
+    const new_user = new User();
+    res.json({msg: new_user})
+})
+// Create an api route "/api/companies/new" that returns a new company
+// Create an api route "/api/user/company" that returns both a new user and a new company
 
-// //adding in another route
-// app.get('/name', (req,res) => {
-//     res.json({name: "SHelley!!!"})
-// })
-
-// //adding in a POST request
-// app.post('/create', (req, res) => {
-//     console.log(req.body)
-//     res.json({msg: `Thanks ${req.body.name}!`})//requires a response
-// })
-
-// app.listen( port, () => {
-//     console.log(`Listening on port ${port}`)
-// })
-
+//listening port in the console log
+app.listen(port, () =>{
+    console.log(`listening on port ${port}`)
+})
 
 //notes
 //faker documentation https://github.com/marak/Faker.js/
