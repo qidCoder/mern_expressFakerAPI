@@ -46,6 +46,7 @@ class Company {
             zipCode : faker.address.zipCode(),
             country : faker.address.country()
         }
+        this.full_address = `${this.address.street} ${this.address.city}, ${this.address.state}, ${this.address.zipCode}`
     }
 }
 
