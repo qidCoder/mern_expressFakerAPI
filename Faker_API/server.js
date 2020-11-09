@@ -66,6 +66,10 @@ app.get('/api/companies/new', (req,res) => {
 });
 
 // Create an api route "/api/user/company" that returns both a new user and a new company
+app.get('/api/user/company', (req, res) =>{
+    const new_user = new User(), new_company = new Company();
+    res.json({user: new_user, company : new_company})
+});
 
 //listening port in the console log
 app.listen(port, () =>{
